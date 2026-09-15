@@ -1,5 +1,5 @@
 // src/modules/dashboard/dashboard.controller.ts
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
+import { CacheTTL } from '@nestjs/cache-manager';
 import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -10,6 +10,7 @@ import {
 import { Role, User } from '../../../generated/prisma/client';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { Roles } from '../../common/decorators/roles.decorator';
+import { UserScopedCacheInterceptor } from '../../common/interceptors/user-scoped-cache.interceptor';
 import { DashboardQueryDto } from './dto/dashboard-query.dto';
 import { DashboardService } from './dashboard.service';
 
@@ -17,7 +18,7 @@ import { DashboardService } from './dashboard.service';
 @ApiBearerAuth()
 @Controller('dashboard')
 @Roles(Role.VIEWER, Role.ANALYST, Role.ADMIN)
-@UseInterceptors(CacheInterceptor)
+@UseInterceptors(UserScopedCacheInterceptor)
 export class DashboardController {
   constructor(private readonly dashboardService: DashboardService) {}
 
