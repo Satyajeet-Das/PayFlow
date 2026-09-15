@@ -1,4 +1,4 @@
-# Finance Dashboard Backend
+# PayFlow
 
 A production-ready **NestJS** backend for a role-based finance dashboard. Built with TypeScript strict mode, Prisma ORM, PostgreSQL, Redis caching, JWT auth, and full OpenAPI documentation.
 
